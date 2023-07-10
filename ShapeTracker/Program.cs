@@ -1,5 +1,6 @@
 using System;
 using ShapeTracker.Models;
+using System.Collections.Generic;
 
 namespace ShapeTracker
 {
@@ -59,11 +60,38 @@ namespace ShapeTracker
       Console.WriteLine("-----------------------------------------");
       Console.WriteLine("What's next?");
       Console.WriteLine("Would you like to check a new triangle (new)?");
-      Console.WriteLine("Please enter 'new' to check the type of a new triangle. To exit, enter any key.");
+      Console.WriteLine("Please enter 'new' to check the type of a new triangle. To list all triangles, enter 'list'. To clear all triangles, enter 'clear'. To exit, enter any key.");
       string userResponse = Console.ReadLine(); 
       if (userResponse == "new" || userResponse == "New")
       {
         Main();
+      }
+      else if (userResponse == "list" || userResponse == "List")
+      {
+        // use Triangle.GetAll to get all the triangles, then print them to 
+        // console
+        
+        // make a new List of Triangles to hold the list we get back from the 
+        // function
+        List<Triangle> allTriangles = Triangle.GetAll();
+
+        // loop through our new list, printing out the lengths of each side of 
+        // each triangle
+        for (int i = 0; i < allTriangles.Count; i++)
+        {
+          Console.WriteLine($"Triangle {i}:");
+          Console.WriteLine($"Side 1: {allTriangles[i].Side1}");
+          Console.WriteLine($"Side 2: {allTriangles[i].Side2}");
+          Console.WriteLine($"Side 3: {allTriangles[i].GetSide3()}");
+        }
+
+      }
+
+      else if (userResponse.ToUpper() == "CLEAR")
+      {
+        Triangle.ClearAll();
+        Console.WriteLine("All Triangles OBLITERATED");
+        Console.WriteLine("Goodbye!");
       }
       else
       {
