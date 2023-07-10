@@ -8,6 +8,11 @@ namespace ShapeTracker.Models{
             Height = length2;
        }
 
+       public int CalculateArea()
+       {
+         return Width * Height;
+       }
+
        public int Width { get; set; }
        public int Height { get; set; }
     }
